@@ -1,0 +1,42 @@
+version: "3"
+
+services:
+  generate-go:
+    build: .
+    image: openapi-generator-cli
+    container_name: openapi-generator-cli
+    tty: true
+    volumes:
+      - ./generator:/generator
+    working_dir: /generator
+    command: ["generate", "-i", "swagger.yaml", "-g", "go", "-o", "gen/go"]
+
+  generate-python:
+    build: .
+    image: openapi-generator-cli
+    container_name: openapi-generator-cli
+    tty: true
+    volumes:
+      - ./generator:/generator
+    working_dir: /generator
+    command:
+      ["generate", "-i", "swagger.yaml", "-g", "python", "-o", "gen/python"]
+
+  generate-typescript:
+    build: .
+    image: openapi-generator-cli
+    container_name: openapi-generator-cli
+    tty: true
+    volumes:
+      - ./generator:/generator
+    working_dir: /generator
+    command:
+      [
+        "generate",
+        "-i",
+        "swagger.yaml",
+        "-g",
+        "typescript",
+        "-o",
+        "gen/typescript",
+      ]
